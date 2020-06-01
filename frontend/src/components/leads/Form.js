@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
-
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addLead } from "../../actions/leads";
 export class Form extends Component {
   state = {
     name: "",
@@ -7,11 +9,22 @@ export class Form extends Component {
     message: "",
   };
 
+  static propTypes = {
+    addLead: PropTypes.func.isRequired,
+  };
+
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = (e) => {
     e.preventDefault();
-    console.log("Submit");
+    const { name, email, message } = this.state;
+    const lead = { name, email, message };
+    this.props.addLead(lead);
+    this.setState({
+      name: "",
+      email: "",
+      message: "",
+    });
   };
   render() {
     const { name, email, message } = this.state;
@@ -60,4 +73,4 @@ export class Form extends Component {
   }
 }
 
-export default Form;
+export default connect(null, { addLead })(Form);

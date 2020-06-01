@@ -19,7 +19,7 @@ export class Leads extends Component {
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>S/N</th>
               <th>Name</th>
               <th>Email</th>
               <th>Message</th>
@@ -27,8 +27,9 @@ export class Leads extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.leads.map((lead) => (
+            {this.props.leads.map((lead, index) => (
               <tr key={lead.id}>
+                <td>{++index}</td>
                 <td>{lead.name}</td>
                 <td>{lead.email}</td>
                 <td>{lead.message}</td>
